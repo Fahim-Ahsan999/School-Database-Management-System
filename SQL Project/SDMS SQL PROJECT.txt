@@ -1,0 +1,878 @@
+-------------------------------------------------School Table-----------------------------
+create table School( 
+   SchID number not null,
+   SchName varchar2(25) not null,
+   SBranchNo Number not null unique, 
+   SDate Date,
+   
+   constraint SchID primary key(SchID)
+   );
+ 
+ insert into School values (SchID_S1.NEXTVAL,'XYZ School',1,(TO_DATE('1996-01-01','yyyy-mm-dd')));
+ insert into School values (SchID_S1.NEXTVAL,'XYZ School',2,(TO_DATE('2002-01-01','yyyy-mm-dd')));
+ insert into School values (SchID_S1.NEXTVAL,'XYZ School',3,(TO_DATE('2002-01-01','yyyy-mm-dd')));
+ insert into School values (SchID_S1.NEXTVAL,'XYZ School',4,(TO_DATE('2005-01-01','yyyy-mm-dd')));
+ insert into School values (SchID_S1.NEXTVAL,'XYZ School',5,(TO_DATE('2006-01-01','yyyy-mm-dd')));
+
+ 
+ Select*
+ from School;
+ 
+ describe School;
+ drop table School;
+
+CREATE SEQUENCE SchID_S1
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 1000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE SchID_S1;
+
+
+-------------------------------------School table 2NF SCon table--------------------------------------
+
+create table SCon( 
+   SConID number not null,
+   SBranchNo number not null,
+   SPhoneNo number unique,
+   SEmail Varchar2(20) not null,
+   
+   SchID number not null,
+   
+   constraint SConID primary key(SConID),
+   constraint SchID_fk1 foreign key(SchID) references School(SchID)
+   
+   );
+   
+   insert into SCon values (SCon_S1.NEXTVAL,1,+880170646001,'XYZSchool01@XYZ.edu',1);
+   insert into SCon values (SCon_S1.NEXTVAL,2,+880170646002,'XYZSchool02@XYZ.edu',2);
+   insert into SCon values (SCon_S1.NEXTVAL,3,+880170646003,'XYZSchoo103@XYZ.edu',3);
+   insert into SCon values (SCon_S1.NEXTVAL,4,+880170646004,'XYZSchool04@XYZ.edu',4);
+   insert into SCon values (SCon_S1.NEXTVAL,5,+880170646005,'XYZSchool05@XYZ.edu',5);
+   
+ Select*
+ from SCon;
+ 
+ describe SCon;
+ drop table SCon;
+ 
+CREATE SEQUENCE SCon_S1
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 1000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE SCon_S1;
+
+-------------------------School table 3NF SAdd -----------------------
+
+create table SAdd( 
+   SAddID number not null,
+   SZip number not null,
+   SCountry varchar2(25) not null,
+   SCity varchar2(10) not null,
+   
+   SchID number not null,
+   
+   constraint SAddID primary key(SAddID),
+   constraint SchID_fk2 foreign key(SchID) references School(SchID)
+   );
+   
+    insert into SAdd values (SAdd_S1.NEXTVAL,1200,'Bangladesh','Dhaka',1);
+    insert into SAdd values (SAdd_S1.NEXTVAL,1160,'Bangladesh','Rajshahi',2);
+    insert into SAdd values (SAdd_S1.NEXTVAL,1240,'Bangladesh','Dhaka',3);
+    insert into SAdd values (SAdd_S1.NEXTVAL,1330,'Bangladesh','Barishal',4);
+    insert into SAdd values (SAdd_S1.NEXTVAL,1020,'Bangladesh','Khulna',5);
+    
+   
+   
+ Select*
+ from SAdd;
+ 
+ describe SAdd;
+ drop table SAdd;
+   
+   
+CREATE SEQUENCE SAdd_S1
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 10000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE SAdd_S1;
+
+---------------------------------------person-----------------------------------
+
+create table Person(
+  PNo Number not null,  
+  PName varchar2(20) not null,
+  PJob varchar2(10) not Null,
+  
+  SchID number,
+  
+
+ constraint PNo primary key(PNo),
+ constraint SchID_fk30 foreign key(SchID) references School(SchID)
+ 
+);
+
+    insert into Person values (PersonNo_S2.NEXTVAL,'Fahad Hasan','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Amir uddin','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Nila Rahman','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rafiq Islam','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Anwar Ali','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Akram Uddin','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rima Khatun','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Anika Tasnim','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Anika Tasnim','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rafiq Udden','Student',1);
+    
+    insert into Person values (PersonNo_S2.NEXTVAL,'Zannat Zafrin','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Anika Islam','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rafiq Ahmed','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rafiq Islam','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Forhad Uddin','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Prakash Roy','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rifat Hossian','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Istique Ahmed','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Nur E Elahi','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Sudman Ahsan','Student',1);
+     
+    insert into Person values (PersonNo_S2.NEXTVAL,'Raka Zaman','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Dia Zaman','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rubayet Ahsmed','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Sakirul Haque','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Tasnim Jahan','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Touqure Mohammad','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Nasir Ali','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Repon Khan','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Anika Khan','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Akhtaujjaman Rony','Student',1);
+     
+    insert into Person values (PersonNo_S2.NEXTVAL,'Delwar Anik','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Anik Kumar gosh','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Tonima Ghosh','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Samia Zhahin','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rafiq Islam','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rafiq Uddin','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Parvej Khan','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Tamanna Mou','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Manik Ahmed','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rijvi Talukdar','Student',1);
+    
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rijvi Ahmed','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Ahmed Foisal','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rini Ahmed','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Frhana Rani','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Fatema Kobir','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rasel Rana','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Joy Choudhuri','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Roney day','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rinki Gosh','Student',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Farhan Islam','Student',1);
+    
+    insert into Person values (PersonNo_S2.NEXTVAL,'Zaved Karim','Teacher',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Rasel Ahmed','Teacher',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Toukir Rahman','Teacher',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Sujana Khan','Teacher',1);
+    insert into Person values (PersonNo_S2.NEXTVAL,'Kabir Khan ','Teacher',1);
+    
+
+
+
+select*
+from person;
+
+describe person;
+drop table person;
+
+CREATE SEQUENCE PersonNo_S2
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 1000
+NOCACHE
+NOCYCLE;
+
+drop sequence PersonNo_S2
+
+------------------------------Table Class---------------------  
+
+create table Class(
+  CID number not null,
+  Class Varchar(10) not null,
+  Secction varchar2(20),
+  
+  SchID number not null,
+  
+  constraint CID primary key (CID),
+  constraint SchID_fk4 foreign key(SchID) references School(SchID)
+);
+
+  insert into Class values(CID_S3.NEXTVAL,'1','A',1);
+  insert into Class values(CID_S3.NEXTVAL,'2','A',1);
+  insert into Class values(CID_S3.NEXTVAL,'3','A',1);  
+  insert into Class values(CID_S3.NEXTVAL,'4','A',1);  
+  insert into Class values(CID_S3.NEXTVAL,'5','A',1); 
+
+select*
+from Class;
+
+describe Class;
+drop table Class;
+
+CREATE SEQUENCE CID_S3
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 1000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE CID_S3;
+
+--------------------------Class Table 3NF ClAdd---------------------
+
+
+create table ClAdd( 
+   ClAddID number not null,
+   BuildingNo number not null,
+   RoomNo number not null unique,
+  
+   CID number not null unique,
+   
+   
+   constraint ClAddID primary key(ClAddID),
+   constraint CID_fk1 foreign key(CID) references Class(CID)
+   );
+   
+   insert into ClAdd values (ClAdd_S3.NEXTVAL,5,101,101);
+   insert into ClAdd values (ClAdd_S3.NEXTVAL,5,202,102);
+   insert into ClAdd values (ClAdd_S3.NEXTVAL,5,303,103);
+   insert into ClAdd values (ClAdd_S3.NEXTVAL,5,304,104);
+   insert into ClAdd values (ClAdd_S3.NEXTVAL,5,405,105);
+    
+    
+   
+   
+ Select*
+ from ClAdd;
+ 
+ describe ClAdd;
+ drop table ClAdd;
+   
+   
+CREATE SEQUENCE ClAdd_S3
+INCREMENT BY 1
+START WITH 100
+MAXVALUE 10000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE ClAdd_S3;
+
+-----------------------------------Student Table-----------------------------
+create table Student( 
+   SID number not null,
+   SName varchar2(25),
+   SGender Varchar(10) not null,
+   Class number,
+   
+   
+   CID number not null,
+   PNo number not null unique,
+   SchID number not null,
+   
+   constraint SID primary key(SID),
+   constraint CID_fk2 foreign key(CID) references Class(CID),
+   constraint PNo_Fk_1 foreign key(PNo) references Person(PNo),
+   constraint SchID_fk5 foreign key(SchID) references School(SchID)
+   );
+
+ 
+ insert into Student values (SID_S4.NEXTVAL,'Fahad Hasan','Male',1,101,101,1);
+ insert into Student values (SID_S4.NEXTVAL,'Amir uddin','Male',1,101,102,1);
+ insert into Student values (SID_S4.NEXTVAL,'Nila Rahman','Female',1,101,103,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rafiq Islam','Male',1,101,104,1);
+ insert into Student values (SID_S4.NEXTVAL,'Anwar Ali','Male',1,101,105,1);
+ insert into Student values (SID_S4.NEXTVAL,'Akram Uddin','Male',1,101,106,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rima Khatun','Female',1,101,107,1);
+ insert into Student values (SID_S4.NEXTVAL,'Anika Tasnim','Female',1,101,108,1);
+ insert into Student values (SID_S4.NEXTVAL,'Anika Tasnim','Female',1,101,109,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rafiq Udden','Male',1,101,110,1);
+ 
+ insert into Student values (SID_S4.NEXTVAL,'Zannat Zafrin','Female',2,102,111,1);
+ insert into Student values (SID_S4.NEXTVAL,'Anika Islam','Female',2,102,112,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rafiq Ahmed','Male',2,102,113,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rafiq Islam','Male',2,102,114,1);
+ insert into Student values (SID_S4.NEXTVAL,'Forhad Uddin','Male',2,102,115,1);
+ insert into Student values (SID_S4.NEXTVAL,'Prakash Roy','Male',2,102,116,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rifat Hossian','Female',2,102,117,1);
+ insert into Student values (SID_S4.NEXTVAL,'Istique Ahmed','Male',2,102,118,1);
+ insert into Student values (SID_S4.NEXTVAL,'Nur E Elahi','Male',2,102,119,1);
+ insert into Student values (SID_S4.NEXTVAL,'Sudman Ahsan','Male',2,102,120,1);
+ 
+ insert into Student values (SID_S4.NEXTVAL,'Raka Zaman','Female',3,103,121,1);
+ insert into Student values (SID_S4.NEXTVAL,'Dia Zaman','Female',3,103,122,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rubayet Ahsmed','Male',3,103,123,1);
+ insert into Student values (SID_S4.NEXTVAL,'Sakirul Haque','Male',3,103,124,1);
+ insert into Student values (SID_S4.NEXTVAL,'Tasnim Jahan','Female',3,103,125,1);
+ insert into Student values (SID_S4.NEXTVAL,'Touqure Mohammad','Male',3,103,126,1);
+ insert into Student values (SID_S4.NEXTVAL,'Nasir Ali','Male',3,103,127,1);
+ insert into Student values (SID_S4.NEXTVAL,'Repon Khan','Male',3,103,128,1);
+ insert into Student values (SID_S4.NEXTVAL,'Anika Khan','Male',3,103,129,1);
+ insert into Student values (SID_S4.NEXTVAL,'Akhtaujjaman Rony','Male',3,103,130,1);
+ 
+ insert into Student values (SID_S4.NEXTVAL,'Delwar Anik','Male',4,104,131,1);
+ insert into Student values (SID_S4.NEXTVAL,'Anik Kumar gosh','Male',4,104,132,1);
+ insert into Student values (SID_S4.NEXTVAL,'Tonima Ghosh','Female',4,104,133,1);
+ insert into Student values (SID_S4.NEXTVAL,'Samia Zhahin','Female',4,104,134,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rafiq Islam','Male',4,104,135,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rafiq Uddin','Male',4,104,136,1);
+ insert into Student values (SID_S4.NEXTVAL,'Parvej Khan','Male',4,104,137,1);
+ insert into Student values (SID_S4.NEXTVAL,'Tamanna Mou','Female',4,104,138,1);
+ insert into Student values (SID_S4.NEXTVAL,'Manik Ahmed','Male',4,104,139,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rijvi Talukdar','Male',4,104,140,1);
+ 
+ insert into Student values (SID_S4.NEXTVAL,'Rijvi Ahmed','Male',5,105,141,1);
+ insert into Student values (SID_S4.NEXTVAL,'Ahmed Foisal','Male',5,105,142,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rini Ahmed','Female',5,105,143,1);
+ insert into Student values (SID_S4.NEXTVAL,'Frhana Rani','Female',5,105,144,1);
+ insert into Student values (SID_S4.NEXTVAL,'Fatema Kobir','Female',5,105,145,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rasel Rana','Male',5,105,146,1);
+ insert into Student values (SID_S4.NEXTVAL,'Joy Choudhuri','Male',5,105,147,1);
+ insert into Student values (SID_S4.NEXTVAL,'Roney day','Male',5,105,148,1);
+ insert into Student values (SID_S4.NEXTVAL,'Rinki Gosh','Female',5,105,149,1);
+ insert into Student values (SID_S4.NEXTVAL,'Farhan Islam','Male',5,105,150,1);
+ 
+ Select*
+ from Student;
+ 
+ describe Student;
+ drop table Student;
+
+CREATE SEQUENCE SID_S4
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 1000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE SID_S4;
+
+------------------------------Student Table 2NF StCon---------------------------------------
+
+create table StCon( 
+   StConID number not null,
+   Sname varchar2(20),
+   SPhoneNo number not null unique,
+   SEmail Varchar2(25) not null unique,
+   
+   SID number not null unique,
+   
+   constraint StConID primary key(StConID),
+   constraint SID_fk1 foreign key(SID) references Student(SID)
+   
+   );
+   
+   insert into StCon values (StCon_S4.NEXTVAL,'Fahad Hasan',+8801710987986,'fahadhasan@XYZ.edu',101);
+   insert into StCon values (StCon_S4.NEXTVAL,'Amir uddin',+8801710986789,'amiruddin@XYZ.edu',102);
+   insert into StCon values (StCon_S4.NEXTVAL,'Nila Rahman',+8801710648348,'nilarahman@XYZ.edu',103);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rafiq Islam',+8801710645483,'rafiqislam@XYZ.edu',104);
+   insert into StCon values (StCon_S4.NEXTVAL,'Anwar Ali',+8801710643909,'anwarali@XYZ.edu',105);
+   insert into StCon values (StCon_S4.NEXTVAL,'Akram Uddin',+8801710673468,'akramuddin@XYZ.edu',106);
+   insert into StCon values (StCon_S4.NEXTVAL,'Anika Tasnim',+8801710646439,'rimakhatun@XYZ.edu',107);
+   insert into StCon values (StCon_S4.NEXTVAL,'Anika Tasnim',+8801710347977,'anikatasnim1@XYZ.edu',108);
+   insert into StCon values (StCon_S4.NEXTVAL,'Anika Tasnim',+8801710903909,'anikatasnim2@XYZ.edu',109);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rafiq Udden',+8801710389893,'rafiqudden@XYZ.edu',110);
+   
+   insert into StCon values (StCon_S4.NEXTVAL,'Zannat Zafrin',+8801728698647,'zannatzafrin@XYZ.edu',111);
+   insert into StCon values (StCon_S4.NEXTVAL,'Anika Islam',+8801728698471,'anikaislam@XYZ.edu',112);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rafiq Ahmed',+8801724534896,'rafiqahmed@XYZ.edu',113);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rafiq Ahmed',+8801720899894,'rafiqislam1@XYZ.edu',114);
+   insert into StCon values (StCon_S4.NEXTVAL,'Forhad Uddin',+8801725895648,'forhaduddin@XYZ.edu',115);
+   insert into StCon values (StCon_S4.NEXTVAL,'Prakash Roy',+8801729986755,'prakashroy@XYZ.edu',116);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rifat Hossian',+8801728347897,'rifathossian@XYZ.edu',117);
+   insert into StCon values (StCon_S4.NEXTVAL,'Istique Ahmed',+8801727994558,'istiqueahmed@XYZ.edu',118);
+   insert into StCon values (StCon_S4.NEXTVAL,'Nur E Elahi',+8801727835667,'nureelahi@XYZ.edu',119);
+   insert into StCon values (StCon_S4.NEXTVAL,'Sudman Ahsan',+8801727865876,'sudmanahsan@XYZ.edu',120);
+   
+   insert into StCon values (StCon_S4.NEXTVAL,'Raka Zaman',+8801737547883,'rakazaman@XYZ.edu',121);
+   insert into StCon values (StCon_S4.NEXTVAL,'Dia Zaman',+8801738475666,'diazaman@XYZ.edu',122);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rubayet Ahsmed',+8801739508675,'rubayetahsmed@XYZ.edu',123);
+   insert into StCon values (StCon_S4.NEXTVAL,'Sakirul Haque',+8801734754879,'sakirulhaque@XYZ.edu',124);
+   insert into StCon values (StCon_S4.NEXTVAL,'Tasnim Jahan',+8801730645647,'tasnimjahan@XYZ.edu',125);
+   insert into StCon values (StCon_S4.NEXTVAL,'Touqure Mohammad',+8801734570387,'touquremohammad@XYZ.edu',126);
+   insert into StCon values (StCon_S4.NEXTVAL,'Nasir Ali',+8801738349768,'nasirali@XYZ.edu',127);
+   insert into StCon values (StCon_S4.NEXTVAL,'Repon Khan',+8801733358468,'reponkhan@XYZ.edu',128);
+   insert into StCon values (StCon_S4.NEXTVAL,'Anika Khan',+8801733786738,'anikakhan@XYZ.edu',129);
+   insert into StCon values (StCon_S4.NEXTVAL,'Akhtaujjaman Rony',+8801337857749,'akhtaujjaman Rony@XYZ.edu',130);
+   
+   insert into StCon values (StCon_S4.NEXTVAL,'Delwar Anik',+8801740654730,'delwaranik@XYZ.edu',131);
+   insert into StCon values (StCon_S4.NEXTVAL,'Anik Kumar gosh',+8801740576799,'anikkumar gosh@XYZ.edu',132);
+   insert into StCon values (StCon_S4.NEXTVAL,'Tonima Ghosh',+8801740455899,'tonimaghosh@XYZ.edu',133);
+   insert into StCon values (StCon_S4.NEXTVAL,'Samia Zhahin',+8801744506095,'samiazhahin@XYZ.edu',134);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rafiq Islam',+8801740774898,'rafiqislam2@XYZ.edu',135);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rafiq Uddin',+8801740646599,'rafiquddin@XYZ.edu',136);
+   insert into StCon values (StCon_S4.NEXTVAL,'Parvej Khan',+8801745788594,'parvejkhan@XYZ.edu',137);
+   insert into StCon values (StCon_S4.NEXTVAL,'Tamanna Mou',+8801745590490,'tamannamou@XYZ.edu',138);
+   insert into StCon values (StCon_S4.NEXTVAL,'Manik Ahmed',+8801744555898,'manikahmed@XYZ.edu',139);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rijvi Talukdar',+8801746456590,'rijvitalukdar@XYZ.edu',140);
+   
+   insert into StCon values (StCon_S4.NEXTVAL,'Rijvi Ahmed',+8801750459708,'rijviahmed@XYZ.edu',141);
+   insert into StCon values (StCon_S4.NEXTVAL,'Ahmed Foisal',+8801750675989,'ahmedfoisal@XYZ.edu',142);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rini Ahmed',+8801754590899,'riniahmed@XYZ.edu',143);
+   insert into StCon values (StCon_S4.NEXTVAL,'Frhana Rani',+8801750458698,'frhanarani@XYZ.edu',144);
+   insert into StCon values (StCon_S4.NEXTVAL,'Fatema Kobir',+8801750645970,'fatemakobir@XYZ.edu',145);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rasel Rana',+8801750458899,'raselrana@XYZ.edu',146);
+   insert into StCon values (StCon_S4.NEXTVAL,'Joy Choudhuri',+8801754596090,'joychoudhuri@XYZ.edu',147);
+   insert into StCon values (StCon_S4.NEXTVAL,'Roney dey',+8801754796090,'roneyday@XYZ.edu',148);
+   insert into StCon values (StCon_S4.NEXTVAL,'Rinki Gosh',+8801750456900,'rinkigosh@XYZ.edu',149);
+   insert into StCon values (StCon_S4.NEXTVAL,'Farhan Islam',+8801750459856,'farhanislam.edu',150);
+   
+   
+ Select*
+ from StCon;
+ 
+ describe StCon;
+ drop table StCon;
+ 
+
+ 
+CREATE SEQUENCE StCon_S4
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 1000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE StCon_S4;
+
+--------------------------------------student table 3NF StAdd---------------------
+
+create table StAdd( 
+   StAddID number not null,
+   StZip number not null,
+   StCountry varchar2(25) not null,
+   StCity varchar2(10) not null,
+   
+   SID number not null,
+   
+   constraint StAddID primary key(StAddID),
+   constraint SID_fk2 foreign key(SID) references Student(SID)
+   );
+   
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',101);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',102);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',103);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',104);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',105);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',106);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',107);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',108);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',109);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',110);
+    
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',111);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',112);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',113);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',114);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',115);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',116);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',117);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',118);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',119);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',120);
+    
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',121);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',122);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',123);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',124);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',125);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',126);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',127);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',128);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',129);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',130);
+    
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',132);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',132);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',133);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',134);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',135);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',136);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',137);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',138);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',139);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',140);
+    
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',141);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',142);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',143);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',144);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',145);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',146);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',147);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',148);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1260,'Bangladesh','Dhaka',149);
+    insert into StAdd values (StAdd_S4.NEXTVAL,1200,'Bangladesh','Dhaka',150);
+    
+   
+   
+ Select*
+ from StAdd;
+ 
+ describe StAdd;
+ drop table StAdd;
+
+CREATE SEQUENCE StAdd_S4
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 1000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE StAdd_S4;
+
+
+
+-------------------------------Employee table----------------------------------
+create table Employee( 
+   EmpNo number not null,
+   EName varchar2(25) not null,
+   DeptNo number not null,
+   EJob varchar(20) not null,
+   salary number,
+   comm number,
+   joinningDate date not null,
+   
+   SchID number not null,
+   
+   constraint EmpNo primary key(EmpNo),
+   constraint SchID_fk6 foreign key(SchID) references School(SchID)
+   );
+ 
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Zaved Karim  ',120,'Teacher',7500,2000,(TO_DATE('1999-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Rasel Ahmed  ',120,'Teacher',5000,1500,(TO_DATE('1999-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Toukir Rahman',120,'Teacher',9000,1500,(TO_DATE('2000-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Sujana Khan  ',120,'Teacher',5000,1250,(TO_DATE('2001-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Kabir Khan   ',120,'Teacher',8000,800,(TO_DATE('2001-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Rifat Tarin  ',110,'Manager',10000,600,(TO_DATE('1996-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Jony Gosh    ',130,'Principle',45000,1000,(TO_DATE('1996-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Jon Kabir    ',140,'Vice Principle',45000,1000,(TO_DATE('1998-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Rupa Nower   ',110,'Accountant',50000,1000,(TO_DATE('1996-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Zunayed Karim  ',120,'Teacher',7500,2000,(TO_DATE('1999-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Palak Ahmed  ',120,'Teacher',5000,1500,(TO_DATE('1999-01-01','yyyy-mm-dd')),1);
+ insert into Employee values (EmpNo_S5.NEXTVAL,'Hanif Rahman',120,'Teacher',9000,1500,(TO_DATE('2000-01-01','yyyy-mm-dd')),1);
+ 
+
+ 
+ Select*
+ from employee;
+ 
+ describe employee;
+ drop table Employee;
+
+CREATE SEQUENCE EmpNo_S5
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 10000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE EmpNo_S5;
+
+
+-----------------------------------Employee Table 2NF-----------------
+
+create table ERAdd( 
+   ERAddID number not null,
+   BuildingNo number not null,
+   ERoomNo number not null,
+  
+   EmpNo number not null,
+   
+   constraint ERAAddID primary key(ERAddID),
+   constraint EmpNo_fk1 foreign key(EmpNo) references Employee(EmpNo)
+   );
+   
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,101,1);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,101,2);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,102,3);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,102,4);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,101,5);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,103,6);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,204,7);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,205,8);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,206,9);
+    insert into ERAdd values (ERAddID_S5.NEXTVAL,1,101,10);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,102,11);
+   insert into ERAdd values (ERAddID_S5.NEXTVAL,1,101,12);
+    
+    
+ Select*
+ from ERAdd;
+ 
+ describe ERAdd;
+ drop table ERAdd;
+   
+   
+CREATE SEQUENCE ERAddID_S5
+INCREMENT BY 1
+START WITH 10000001
+MAXVALUE 100000001
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE ERAddID_S5;
+
+------------------------------Table teacher--------------------
+
+create table Teacher( 
+   TID number not null,
+   Tname varchar2(25) not null,
+   Subject varchar(10) not null,
+   TGender varchar(10) not null,
+   
+   PNo number not null,
+   CID number,
+   EmpNo number not null,
+
+   
+   constraint TID primary key(TID),
+   constraint PNo_Fk_2 foreign key(PNo) references Person(PNo),
+   constraint CID_fk3 foreign key(CID) references Class(CID),
+   constraint EmpNo_fk2 foreign key(EmpNo) references Employee(EmpNo)
+
+   
+   );
+ 
+  insert into Teacher values ( TID_S6.NEXTVAL,'Zaved Karim','Math','Male',151,101,1);
+  insert into Teacher values ( TID_S6.NEXTVAL,'Rasel Ahmed','English','Male',152,102,2);
+  insert into Teacher values ( TID_S6.NEXTVAL,'Toukir Rahman','English','Male',153,103,3);
+  insert into Teacher values ( TID_S6.NEXTVAL,'Sujana Khan','Bangla','Female',154,104,4);
+  insert into Teacher values ( TID_S6.NEXTVAL,'Kabir Khan ','Math','Male',155,105,5);
+  
+  
+  Select*
+  from Teacher;
+ 
+ describe Teacher;
+ drop table Teacher;
+
+CREATE SEQUENCE TID_S6
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 50000000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE TID_S6;
+
+--------------------------Teacher adress--------------
+
+create table TAdd( 
+   TAddID number not null,
+   TZip number not null,
+   TCountry varchar2(25) not null,
+   TCity varchar2(10) not null,
+   
+   TID number not null,
+   
+   constraint TAddID primary key(TAddID),
+   constraint TID_fk1 foreign key(TID) references Teacher(TID)
+   );
+   
+    insert into TAdd values (TAddID_s6.NEXTVAL,1200,'Bangladesh','Dhaka',1);
+    insert into TAdd values (TAddID_S6.NEXTVAL,1260,'Bangladesh','Dhaka',2);
+    insert into TAdd values (TAddID_S6.NEXTVAL,1260,'Bangladesh','Dhaka',3);
+    insert into TAdd values (TAddID_s6.NEXTVAL,1200,'Bangladesh','Dhaka',4);
+    insert into TAdd values (TAddID_S6.NEXTVAL,1260,'Bangladesh','Dhaka',5);
+    
+    
+   
+   
+ Select*
+ from TAdd;
+ 
+ describe TAdd;
+ drop table TAdd;
+   
+   
+CREATE SEQUENCE TAddID_S6
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 100000
+NOCACHE
+NOCYCLE;
+
+Drop SEQUENCE TAddID_S6; 
+
+-------------------------------------library----------------------------
+
+create table Libraryy(
+   LID number not null,
+   Job varchar(20) not null unique,
+   
+   SchID number not null,
+   
+   constraint LID primary key (LID),
+   constraint SchID_fk7 foreign key(SchID) references School (SchID)
+);
+   
+   
+    insert into Libraryy values (LID_S7.NEXTVAL,'Manager',1);
+    insert into Libraryy values (LID_S7.NEXTVAL,'Books',1);
+    insert into Libraryy values (LID_S7.NEXTVAL,'Members',1);
+    insert into Libraryy values (LID_S7.NEXTVAL,'Worker',1);
+
+   
+   
+   
+select*
+from Libraryy;
+
+describe Libraryy;
+drop table Libraryy;
+
+CREATE SEQUENCE LID_S7
+INCREMENT BY 1
+START WITH 100
+MAXVALUE 100000
+NOCACHE
+NOCYCLE;
+
+DROP SEQUENCE LID_S7;
+
+-----------------------------Member--------------------------
+
+create table Member( 
+   MID number not null,
+   MName varchar2(25) not null,
+   MDate date,
+   
+   PNo number not null,
+   LID number not null,
+   
+   constraint MID primary key(MID),
+   constraint PNo_Fk_3 foreign key(PNo) references Person(PNo),
+   constraint LID_fk1 foreign key(LID) references Libraryy(LID)
+);
+
+    insert into Member values (MID_S8.NEXTVAL,'Fahad Hasan',(TO_DATE('1996-01-01','yyyy-mm-dd')),101,102);
+    insert into Member values (MID_S8.NEXTVAL,'Amir uddin',(TO_DATE('1998-01-01','yyyy-mm-dd')),102,102);
+    insert into Member values (MID_S8.NEXTVAL,'Nila Rahman',(TO_DATE('2000-01-01','yyyy-mm-dd')),103,102);
+    insert into Member values (MID_S8.NEXTVAL,'Rafiq Islam',(TO_DATE('2000-01-01','yyyy-mm-dd')),104,102);
+    insert into Member values (MID_S8.NEXTVAL,'Anwar Ali',(TO_DATE('1999-01-01','yyyy-mm-dd')),105,102);
+    
+    insert into Member values (MID_S8.NEXTVAL,'Zannat Zafrin',(TO_DATE('1998-01-01','yyyy-mm-dd')),111,102);
+    insert into Member values (MID_S8.NEXTVAL,'Anika Islam',(TO_DATE('1999-01-01','yyyy-mm-dd')),112,102);
+    insert into Member values (MID_S8.NEXTVAL,'Rafiq Ahmed',(TO_DATE('1999-01-01','yyyy-mm-dd')),113,102);
+    
+    insert into Member values (MID_S8.NEXTVAL,'Raka Zaman',(TO_DATE('2000-01-01','yyyy-mm-dd')),121,102);
+    insert into Member values (MID_S8.NEXTVAL,'Dia Zaman',(TO_DATE('1997-01-01','yyyy-mm-dd')),122,102);
+    
+    
+    
+select*
+from Member;
+
+describe Member;
+drop table Member;
+
+CREATE SEQUENCE MID_S8
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 1001
+NOCACHE
+NOCYCLE;
+
+DROP SEQUENCE MID_S8;
+
+-----------------------------------------books---------------------------
+create table Books( 
+   BID number not null,
+   BName varchar2(25) not null,
+   BDate date,
+   
+   LID number not null,
+   
+   constraint BID primary key(BID),
+   constraint LID_fk2 foreign key(LID) references Libraryy(LID)
+);
+
+    insert into Books values (BID_S9.NEXTVAL,'English',(TO_DATE('1996-01-01','yyyy-mm-dd')),101);
+    insert into Books values (BID_S9.NEXTVAL,'Bangla',(TO_DATE('2000-01-01','yyyy-mm-dd')),101);
+    insert into Books values (BID_S9.NEXTVAL,'English',(TO_DATE('2001-01-01','yyyy-mm-dd')),101);
+    insert into Books values (BID_S9.NEXTVAL,'English',(TO_DATE('2005-01-01','yyyy-mm-dd')),101);
+    insert into Books values (BID_S9.NEXTVAL,'Bangla',(TO_DATE('2005-01-01','yyyy-mm-dd')),101);
+    insert into Books values (BID_S9.NEXTVAL,'English',(TO_DATE('1996-01-01','yyyy-mm-dd')),101);
+    insert into Books values (BID_S9.NEXTVAL,'English',(TO_DATE('2007-01-01','yyyy-mm-dd')),101);
+    insert into Books values (BID_S9.NEXTVAL,'Bangla',(TO_DATE('2005-01-01','yyyy-mm-dd')),101);
+    insert into Books values (BID_S9.NEXTVAL,'English',(TO_DATE('1996-01-01','yyyy-mm-dd')),101);
+
+    
+    
+    
+select*
+from Books;
+
+describe Books;
+drop table Books;
+
+
+CREATE SEQUENCE BID_S9
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 1001
+NOCACHE
+NOCYCLE;
+
+DROP SEQUENCE BID_S9;
+
+------------------------------books adress-----------------------------------------
+
+create table BAdd( 
+   BAddID number not null,
+   Block number not null,
+   Self number not null,
+   
+   BID number not null,
+   
+   constraint BAddID primary key(BAddID),
+   constraint BID_fk1 foreign key(BID) references Books(BID)
+);
+
+   insert into BAdd values (BAddID_S9.NEXTVAL,1,2,101);
+   insert into BAdd values (BAddID_S9.NEXTVAL,1,4,102);
+   insert into BAdd values (BAddID_S9.NEXTVAL,2,1,103);
+   insert into BAdd values (BAddID_S9.NEXTVAL,2,1,104);
+   insert into BAdd values (BAddID_S9.NEXTVAL,4,2,105);
+   insert into BAdd values (BAddID_S9.NEXTVAL,1,3,106);
+   insert into BAdd values (BAddID_S9.NEXTVAL,3,2,107);
+   insert into BAdd values (BAddID_S9.NEXTVAL,1,5,108);
+   insert into BAdd values (BAddID_S9.NEXTVAL,3,2,109);
+   insert into BAdd values (BAddID_S9.NEXTVAL,5,1,110);
+    
+    
+select*
+from BAdd;
+
+describe BAdd;
+drop table BAdd;
+
+CREATE SEQUENCE BAddID_S9
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 10000
+NOCACHE
+NOCYCLE;
+
+drop sequence BAddID_S9
+
+
+
+SELECT SEQUENCE_NAME, MIN_VALUE, MAX_VALUE, INCREMENT_BY, LAST_NUMBER
+FROM USER_SEQUENCES;

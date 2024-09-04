@@ -1,0 +1,67 @@
+1. Write a query to list the name and salary of employees who earn more than $7500 and 
+are in department 120 or 130. Label the columns name of employee Employees and salary as Monthly Salary.
+
+select ename, salary
+from employee
+where deptno = 120 or deptno = 130
+and salary>7500;
+
+2. Display the name and join date of every employee who was hired in 1999.
+
+select ename, joinningdate
+from employee
+where To_char (joinningdate,'yy') = '99';
+
+3. Display the name, salary, and commission for all employees who earn commissions more than 1000. Sort data in descending order of salary and commissions.
+
+select ename, salary, comm
+from employee
+where comm>1000
+order by salary desc , comm Desc;
+
+4.  Display the names of all teacher in deptno 20 with salary, subject and job with joining. Commission will be Grete than or equal 1000.
+
+select Teacher.TName, employee.ename, deptno, ejob, salary, subject, comm
+from teacher, employee  
+where deptno = 120
+and comm >= 1000;
+
+5. Write a query that produces the following for the ejob : <job name> earns <salary>monthly but wants to earn<3 times salary>. Label the column Dream Salaries. 
+
+select ejob || ' earns ' || salary || ' monthly but wants to earn ' || 3*salary AS "DREAMSALARY"
+from employee;
+
+6. Write a query that will display the student name with the first letter capitalized and all other letters lowercase and the length of their name, for all employees whose name starts with A, F, or M. Give each column an appropriate label.
+
+select INITCAP(sname), LENGTH('sname')
+from student
+where sname like 'R%' or sname like 'F%' or sname like 'M%';
+
+7.  Display all the employees who are getting more than the average salaries of all the employees.
+
+SELECT EMPNO, ENAME, DEPTNO
+FROM EMPLOYEE A
+WHERE SALARY > (SELECT AVG(SALARY)
+FROM EMPLOYEE B
+WHERE A.DEPTNO = B.DEPTNO
+GROUP BY DEPTNO);
+8. Display all the employee who is a teacher getting average, maximum and minimum salary from employee table
+
+SELECT	AVG(salary), MAX(salary), MIN(salary)
+from	employee
+where ejob like 'Teacher%'
+
+9. Count the student who are in class 5
+
+SELECT COUNT(*)
+FROM STUDENT
+WHERE CLASS=5;
+
+10. Display all the employees who are getting more than the average salaries of all the employees
+
+SELECT EMPNO, ENAME, DEPTNO
+FROM EMPLOYEE A
+WHERE SALARY > (SELECT AVG(SALARY)
+FROM EMPLOYEE B
+WHERE A.DEPTNO = B.DEPTNO
+GROUP BY DEPTNO);

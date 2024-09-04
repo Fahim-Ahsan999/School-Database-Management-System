@@ -1,0 +1,56 @@
+1. Create a sequence to be used with the primary key column of the EMPLOYEE table. The sequence should start at 50 and have a maximum value of 2000. Have your sequence increment by 5 numbers. Name the sequence EmpNo_Vu
+
+CREATE SEQUENCE EmpNo_Vu
+INCREMENT BY 5
+START WITH 50
+MAXVALUE 2000
+NOCACHE
+NOCYCLE;
+
+
+1. Create a sequence to be used with the primary key column of the BOOKS table. The sequence should start at 1 and have a maximum value of 50000. Have your sequence increment by 1 number. Name the sequence BID_Vu
+
+CREATE SEQUENCE BID_Vu
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 5000
+NOCACHE
+NOCYCLE;
+
+
+2. Create a sequence to be used with the primary key column of the LIBRARY table. The sequence should start at 100 and have a maximum value of 500. Have your sequence increment by 10 numbers. Name the sequence LID_Vu
+
+CREATE SEQUENCE LID_Vu
+INCREMENT BY 10
+START WITH 100
+MAXVALUE 500
+NOCACHE
+NOCYCLE;
+
+
+3. Create a sequence to be used with the primary key column of the ADDRESS table. The sequence should start at 101 and have a maximum value of 100000. Have your sequence increment by 20 number. Name the sequence ADD_Vu. It will Start again after 100000.
+
+CREATE SEQUENCE ADD_Vu
+INCREMENT BY 20
+START WITH 101
+MAXVALUE 100000
+NOCACHE
+CYCLE;
+
+4. Create a sequence to be used with the primary key column of the STUDENT table. The sequence should start at 101 and have a maximum value of 300. Have your sequence increment by 1 number. Name the sequence SID_Vu
+
+CREATE SEQUENCE SID_Vu
+INCREMENT BY 1
+START WITH 101
+MAXVALUE 300
+NOCACHE
+CYCLE;
+
+5. Create a sequence to be used with the primary key column of the EMPLOYEE table. The sequence should start at 50 and have a maximum value of 6000. Have your sequence increment by 5 numbers. Name the sequence EmpNo_Vu
+
+CREATE SEQUENCE EmpNo_Vu
+INCREMENT BY 5
+START WITH 50
+MAXVALUE 6000
+NOCACHE
+NOCYCLE;

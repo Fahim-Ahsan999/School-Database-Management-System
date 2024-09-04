@@ -1,0 +1,42 @@
+1. Create a view called EMP_VU based on the employee number, employee name, and department number from the EMP table. Change the heading for the employee name to EMPLOYEE. 
+      
+CREATE VIEW EMP_VU
+AS SELECT EMPNO, ENAME AS "EMPLOYEE", DEPTNO
+FROM EMPLOYEE;
+
+2. Create a view called STU_VU based on teacher table and make it not editable 
+
+CREATE VIEW STU_VU
+AS SELECT SID AS "STUDENT ID", SNAME AS "ALL STUDENT", CLASS
+FROM STUDENT;
+
+3. Create a view called TEACHER_VU based on the TID, TNAME, SALARY, and COMM from the EMP table. Change the heading for the SALARY  to MONTHLY  SALARY 
+
+CREATE VIEW TEACHER_VU
+AS SELECT TID, TNAME, SUBJECT, TGENDER
+FROM TEACHER
+WITH READ ONLY;
+
+4. Create a view called TEACHER_VU based on the TID, TNAME, SALARY, and COMM from the EMP table. Change the heading for the SALARY  to MONTHLY  SALARY 
+
+CREATE VIEW BOOKS_VU
+AS SELECT BID AS "BOOKS ID", BNAME AS "BOOKS NAME", BDATE
+FROM BOOKS;
+
+
+5. Show min, max, avg salary of employee table with view group function.
+
+CREATE VIEW employee_vu (ename, minsalary, maxsalary, avgsalary)
+AS SELECT	e.ename, MIN(salary), MAX(salary), AVG(salary)
+FROM employee e
+GROUP BY e.ename;
+
+
+5.	Create a sequence to be used with the primary key column of the TEACHER table. The sequence should start at 100 and have a maximum value of 500000. Have your sequence increment by 50 numbers. Name the sequence TID_Vu
+
+CREATE SEQUENCE SID_Vu
+INCREMENT BY 50
+START WITH 100
+MAXVALUE 500000
+NOCACHE
+CYCLE;
